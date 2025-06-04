@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Определение повреждений контейнера</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0056b3;
+            text-align: center;
+        }
+        .upload-section {
+            border: 2px dashed #0056b3;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #003d7a;
+        }
+<!--        .sidebar {-->
+<!--            background-color: #0056b3;-->
+<!--            color: white;-->
+<!--            padding: 15px;-->
+<!--            border-radius: 5px;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+<!--        .sidebar h2 {-->
+<!--            margin-top: 0;-->
+<!--        }-->
+<!--        .radio-group {-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+<!--        .radio-group label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 5px;-->
+<!--        }-->
+        .preview-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .preview-images img {
+            max-width: 200px;
+            max-height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Определение повреждений контейнера</h1>
+        <p>Загрузите изображения, чтобы найти повреждения</p>
+
+        <form method="POST" action="/" enctype="multipart/form-data">
+            <div class="upload-section">
+                <h3>Загрузите изображения</h3>
+                <p>Выберите изображения контейнера (JPG, JPEG, PNG)</p>
+                <input type="file" name="files" id="files" multiple accept="image/jpeg,image/png,image/jpg">
+            </div>
+
+            <button type="submit" class="btn">Продолжить</button>
+        </form>
+    </div>
+</body>
+</html>
