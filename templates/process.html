@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обработка изображений</title>
+    <title>HelpTallyman</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,12 +76,26 @@
         .sidebar h2 {
             margin-top: 0;
         }
+
+        .radio-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
         .radio-group {
+            flex: 1;
             margin-bottom: 15px;
         }
         .radio-group label {
             display: block;
             margin-bottom: 5px;
+        }
+
+        }
+        .radio-group label:first-child {
+            font-weight: bold;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -98,33 +112,35 @@
         <form method="POST" action="/process" enctype="multipart/form-data">
 
             <div class="sidebar">
-                <h2>Для каждого из трех изображений выберите сторону контейнера</h2>
+                <h2>Для каждого из трех изображений выберите сторону контейнера.<br>
+                Изображения выведены слева направо.</h2>
 
-                <div class="radio-group">
-                    <label>На первом изображении:</label>
-                    <label><input type="radio" name="wall_type_1" value="front" required> Передняя стенка</label>
-                    <label><input type="radio" name="wall_type_1" value="back"> Задняя стенка</label>
-                    <label><input type="radio" name="wall_type_1" value="left"> Левая стенка</label>
-                    <label><input type="radio" name="wall_type_1" value="right"> Правая стенка</label>
-                </div>
+                <div class="radio-container">
+                    <div class="radio-group">
+                        <label>На первом изображении:</label>
+                        <label><input type="radio" name="wall_type_1" value="front" required> Передняя стенка</label>
+                        <label><input type="radio" name="wall_type_1" value="back"> Задняя стенка</label>
+                        <label><input type="radio" name="wall_type_1" value="left"> Левая стенка</label>
+                        <label><input type="radio" name="wall_type_1" value="right"> Правая стенка</label>
+                    </div>
 
-                <div class="radio-group">
-                    <label>На втором изображении:</label>
-                    <label><input type="radio" name="wall_type_2" value="front" required> Передняя стенка</label>
-                    <label><input type="radio" name="wall_type_2" value="back"> Задняя стенка</label>
-                    <label><input type="radio" name="wall_type_2" value="left"> Левая стенка</label>
-                    <label><input type="radio" name="wall_type_2" value="right"> Правая стенка</label>
-                </div>
+                    <div class="radio-group">
+                        <label>На втором изображении:</label>
+                        <label><input type="radio" name="wall_type_2" value="front" required> Передняя стенка</label>
+                        <label><input type="radio" name="wall_type_2" value="back"> Задняя стенка</label>
+                        <label><input type="radio" name="wall_type_2" value="left"> Левая стенка</label>
+                        <label><input type="radio" name="wall_type_2" value="right"> Правая стенка</label>
+                    </div>
 
-                <div class="radio-group">
-                    <label>На третьем изображении:</label>
-                    <label><input type="radio" name="wall_type_3" value="front" required> Передняя стенка</label>
-                    <label><input type="radio" name="wall_type_3" value="back"> Задняя стенка</label>
-                    <label><input type="radio" name="wall_type_3" value="left"> Левая стенка</label>
-                    <label><input type="radio" name="wall_type_3" value="right"> Правая стенка</label>
+                    <div class="radio-group">
+                        <label>На третьем изображении:</label>
+                        <label><input type="radio" name="wall_type_3" value="front" required> Передняя стенка</label>
+                        <label><input type="radio" name="wall_type_3" value="back"> Задняя стенка</label>
+                        <label><input type="radio" name="wall_type_3" value="left"> Левая стенка</label>
+                        <label><input type="radio" name="wall_type_3" value="right"> Правая стенка</label>
+                    </div>
                 </div>
             </div>
-
             <button type="submit" name="analyze" class="btn">Найти повреждения</button>
         </form>
     </div>
