@@ -109,7 +109,6 @@ def container_predict(image_rgb, idx):
             cv2.putText(image_rgb, f'Class: {int(cls)}, Conf: {conf:.2f}', (int(x1), int(y1) + 20),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
-    # st.write("Найденный контейнер для:", im_name)
     processed_img_path = os.path.join(app.config['UPLOAD_FOLDER'], f'processed_container_{idx}.jpg')
     cv2.imwrite(processed_img_path, cv2.cvtColor(image_rgb, cv2.COLOR_RGB2BGR))
 
@@ -142,8 +141,6 @@ def find_cont_number(image, xyxys, idx):
     cv2.imwrite(processed_img_path, cv2.cvtColor(processed_img, cv2.COLOR_RGB2BGR))
 
     return results_number, processed_img_path
-
-    # print('cont_result', cont_result)
 
 
 def find_cont_number_with_manual_wall(idx, image, container_xyxys):
@@ -210,32 +207,18 @@ def clean_temp_folder():
 
 def make_report(results_dmg, result_number):
     cont_result_all = ''
-    cont_result = [None, None]
 
     side_str = ''
     for result_num, result in enumerate(results_dmg):
-        # print('result', type(result), len(result), result)
-        # print('result[0]', type(result[0]), len(result[0]), result[0])
         side_str = get_wall_str(result_num, side_str)
-        # print('side_str', type(side_str), side_str)
-        # for result in result_list:
-        # names = result.names
-        # boxes = result.boxes
         names = result[0]['names']
         boxes = result[0]['boxes']
-        # print('names', type(names), names)
-        # print('boxes', type(boxes), boxes)
 
         for box in boxes:
-            # print('box', type(box), box)
             class_name = names[str(int(box['cls']))]
-            # print('class_name', type(class_name), class_name)
-            # side_str += dmg_translate[class_name] + ', '
             side_str += dmg_translate[class_name] + ', '
-            # print('side_str 1', type(side_str), side_str)
 
         cont_result_all += side_str
-    # print('cont_result_all', type(cont_result_all), cont_result_all)
 
     # Загружаем шаблон
     AOF_template_path = "docs_templates/AOF_template.xlsx"
@@ -303,7 +286,6 @@ def process():
                 if wall_type:
                     wall_types.append(wall_type)
             session['wall_types'] = wall_types
-            # print("session['wall_types']", type(session['wall_types']), session['wall_types'])
 
             # Process images
             uploaded_files = session.get('uploaded_files', [])
@@ -340,7 +322,6 @@ def process():
                     'damage': 'processed_damage_' + str(idx) + '.jpg',
                     'number': 'processed_number_' + str(idx) + '.jpg' if number_img else None
                 })
-                # print('processed_images', type(processed_images), processed_images)
 
             session['result_dmg'] = cont_dmg_result
             session['result_number'] = result_number
@@ -369,7 +350,6 @@ def process():
             return redirect(url_for('index'))
 
     return render_template('process.html')
-    # return redirect(url_for('/'))
 
 @app.route('/results')
 def results():
