@@ -1,6 +1,6 @@
 import os
-import io
-import time
+# import io
+# import time
 import shutil
 import secrets
 from PIL import Image as PILImage
@@ -204,6 +204,12 @@ def clean_temp_folder():
         except Exception as e:
             print(f"Ошибка при удалении {file_path}: {e}")
 
+    session.pop('uploaded_files', None)
+    session.pop('temp_files', None)
+    session.pop('result_dmg', None)
+    session.pop('result_number', None)
+    session.pop('processed_images', None)
+
 
 def make_report(results_dmg, result_number):
     cont_result_all = ''
@@ -289,16 +295,14 @@ def process():
 
             # Process images
             uploaded_files = session.get('uploaded_files', [])
-            temp_files = session.get('temp_files', [])
-            wall_types = session.get('wall_types', [])
 
             cont_dmg_result = []
+            result_number = ''
             processed_images = []
 
             for idx, filename in enumerate(uploaded_files, start=1):
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 temp_filepath = os.path.join(app.config['TEMP_IMAGES_DIR'], filename)
-                curr_im_filename = temp_files[idx-1]
 
                 image_bbs = cv2.imread(temp_filepath)
                 image_rgb = cv2.cvtColor(image_bbs, cv2.COLOR_BGR2RGB)
@@ -337,19 +341,14 @@ def process():
                 res_number = session.get('result_number', 'UNKNOWN')
 
             res_dmg = session.get('result_dmg', [])
-            report_filename = make_report(res_dmg, res_number)
+            make_report(res_dmg, res_number)
 
             clean_temp_folder()
-
-            session.pop('uploaded_files', None)
-            session.pop('temp_files', None)
-            session.pop('result_dmg', None)
-            session.pop('result_number', None)
-            session.pop('processed_images', None)
 
             return redirect(url_for('index'))
 
     return render_template('process.html')
+
 
 @app.route('/results')
 def results():
