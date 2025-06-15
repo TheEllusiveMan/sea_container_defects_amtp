@@ -182,8 +182,6 @@ def results_to_dict(results):
 
 
 def clean_temp_folder():
-    """Удаляет все файлы в указанной папке, очищает поле ввода номера контейнера."""
-
     for filename in os.listdir(app.config['TEMP_IMAGES_DIR']):
         file_path = os.path.join(app.config['TEMP_IMAGES_DIR'], filename)
         try:
