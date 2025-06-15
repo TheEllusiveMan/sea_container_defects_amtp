@@ -166,7 +166,6 @@ def results_to_dict(results):
     result_list = []
     for result in results:
         boxes_data = []
-        # print('result', type(result), result)
         for res in result:
             for box in res.boxes:
                 boxes_data.append({
